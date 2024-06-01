@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web History API Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        
+        button { margin: 10px; padding: 10px 20px; font-size: 16px; }
+
+        p { font-size: 18px; }
+        img {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <img src="../image.jpeg">
+
+    <h1>Web History API Example</h1>
+    <button id="backBtn">Go Back</button>
+    <button id="forwardBtn">Go Forward</button>
+    <button id="goBtn">Go 2 Steps Back</button>
+
+    <p id="historyLength"></p>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+              const backBtn = document.getElementById("backBtn"),
+                    forwardBtn = document.getElementById("forwardBtn"),
+                    goBtn = document.getElementById("goBtn"),
+                    historyLength = document.getElementById("historyLength");
+
+            historyLength.textContent = `Browser History Length: ${history.length}`;
+
+            backBtn.addEventListener("onclick", () => history.back())
+            forwardBtn.addEventListener("click", () => history.forward());
+            goBtn.addEventListener("click", () => history.go(-2)); // going back two pages / +2 going forwrd two pages.. so on
+        });
+    </script>
+</body>
+</html>

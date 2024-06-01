@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .nav {
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin-right: 10px;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+        .content {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        Real World Example: Single Page Application (SPA)
+        Let's build a simple SPA for a blog. 
+        The SPA will have a home page, an about page, and individual post pages. 
+        We'll use the History API to navigate between these pages without reloading the entire page.
+    -->
+    
+    <div class="nav">
+        <a href="/" onclick="navigate(event, '/')">Home</a>
+        <a href="/about" onclick="navigate(event, '/about')">About</a>
+        <a href="/post/1" onclick="navigate(event, '/post/1')">Post 1</a>
+        <a href="/post/2" onclick="navigate(event, '/post/2')">Post 2</a>
+    </div>
+
+    <div class="content" id="content">
+        <h1>Home</h1>
+        <p>Welcome to the home page!</p>
+    </div>
+
+
+    <script>
+        // Content for different pages
+        const contentMap = {
+            '/': '<h1>Home</h1><p>Welcome to the home page!</p>',
+            '/about': '<h1>About</h1><p>This is the about page.</p>',
+            '/post/1': '<h1>Post 1</h1><p>This is the first post.</p>',
+            '/post/2': '<h1>Post 2</h1><p>This is the second post.</p>'
+        };
+
+        // Function to navigate and push to the history stack of URLs
+        function navigate(event, path) {
+            event.preventDefault(); // Prevent default anchor behavior
+            updateContent(path);
+            window.history.pushState({path: path}, "", path) // parameters: (object {}, "" title ignored, URL)
+        }
+
+
+        // Function to update content based on path
+        function updateContent(path) {
+            const content = contentMap[path]
+            document.getElementById("content").innerHTML = content ? content : '<h1>404</h1><p>Page not found.</p>';
+        }
+
+        // Listen for popstate events to handle back/forward navigation
+        window.addEventListener("popstate", (event)=> {
+            const path = event.state ? event.state.path : "/";  
+            updateContent(path)
+        })
+
+
+        // Handle initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            let path = window.location.pathname;
+            if (!contentMap[path]) {
+                path = '/'; // Default to home page if path is not found
+            }
+            updateContent(path);
+            window.history.replaceState({path: path}, '', path); // Replace the state for the initial load
+        });
+
+
+    </script>
+
+</body>
+</html>

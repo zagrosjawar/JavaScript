@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Preference</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #008CBA;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005f73;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label, input {
+            display: inline-block;
+            margin: 10px 0;
+        }
+        div {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- LocalStorage Object example -->
+    <h1>Theme Toggle Example</h1>
+    <p>Click the button below to toggle between light and dark themes. 
+        Your preference will be saved and remembered even if you close the browser or reload the page.</p>
+    <button id="themeToggleBtn">Toggle Theme</button>
+
+    <hr>
+    <!-- sessionStorage Object example-->
+    <h1>Form Data Retention</h1>
+    <form id="dataForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <br>
+    <!-- for reading-->
+    <hr>
+    <div>
+    <h1>Advantages of Using <code>localStorage</code> and <code>sessionStorage</code></h1>
+
+    <h2>Performance Improvement:</h2>
+    <ul>
+        <li><strong>Reduced Server Load:</strong> Fewer requests to the server, decreasing server load and bandwidth usage.</li>
+        <li><strong>Faster Access:</strong> Quick access to data compared to retrieving from a remote server.</li>
+    </ul>
+
+    <h2>Offline Availability:</h2>
+    <ul>
+        <li><strong>Offline Functionality:</strong> Enables web applications to work offline by storing data locally.</li>
+    </ul>
+
+    <h2>User Experience Enhancement:</h2>
+    <ul>
+        <li><strong>Persistent User Preferences:</strong> Store user settings (e.g., theme preferences) locally for immediate application.</li>
+        <li><strong>Session Management:</strong> Store session-specific data (e.g., form inputs) for a personalized experience.</li>
+    </ul>
+
+    <h2>Reduced Latency:</h2>
+    <ul>
+        <li><strong>Instant Read Access:</strong> Access data instantly from <code>localStorage</code> or <code>sessionStorage</code>.</li>
+    </ul>
+
+    <h2>When to Use <code>localStorage</code> and <code>sessionStorage</code></h2>
+
+    <h3><code>localStorage</code>:</h3>
+    <p><strong>Use Cases:</strong> User preferences, caching static resources, storing data that persists across sessions.</p>
+</div>
+
+    <script>
+        /* ----------- JS localStorage example----*/
+        // Function to toggle theme
+        const toggleTheme = () => {
+            let theme = localStorage.getItem("theme");
+            if (theme == "dark") {
+                localStorage.setItem("theme", "light");
+                document.body.style.backgroundColor = "white";
+                document.body.style.color = "black";
+            } else {
+                localStorage.setItem("theme", "dark");
+                document.body.style.backgroundColor = 'black';
+                document.body.style.color = 'white';
+            }
+        }
+        
+
+        // Set initial theme based on localStorage
+        document.addEventListener("DOMContentLoaded", () => {
+            let theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.body.style.backgroundColor = 'black';
+                document.body.style.color = 'white';
+            } else {
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+            }
+        });
+
+        // Event listener for theme toggle button
+        document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+
+
+
+        //--------------JS sessionStorage Object example --------//
+
+        // Save form data to the local sessionStorage
+        // saving the form data (name and email) during the session 
+        const saveFormData = ()=> {
+            sessionStorage.setItem('name', document.getElementById('name').value); // "name", "value"
+            sessionStorage.setItem('email', document.getElementById('email').value);
+        };
+
+        //  Load form data from sessionStorage
+        const loadFormData = () => {
+            document.getElementById('name').value = sessionStorage.getItem('name') || ''; //returns the vlaue of the key "name"
+            document.getElementById('email').value = sessionStorage.getItem('email') || '';
+        };
+
+        // Event listener to save data on input change (when user provide data)
+        document.getElementById("fataForm").addEventListener("input", saveFormData);
+
+        // Load form data on page load but why loading again?
+        document.addEventListener('DOMContentLoaded', loadFormData);
+
+        /*
+        The purpose of loading form data on page load is to restore the form's state to what it was during the user's previous session. 
+        This is particularly useful in scenarios where the user navigates away from the page and then returns, 
+        either by using the back button, reloading the page, or opening the page in a new tab within the same session.
+        */
+
+    </script>
+</body>
+</html>

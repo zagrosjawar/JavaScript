@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker Example: Factorial Calculation</title>
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    input, button {padding: 10px; margin: 5px; font-size: 16px;}
+    button {cursor: pointer;}
+    p {font-size: 18px;}
+  </style>
+</head>
+<body>
+    <h1>Factorial Calculator</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number" />
+    <button onclick="startWorker()">Calculate Factorial</button>
+    <button onclick="stopWorker()">Stop Calculation</button>
+    <p>Result: <span id="result"></span></p>
+
+
+    <script>
+        let worker;
+
+        // Function to start the Web Worker
+        function startWorker() {
+            const number = document.getElementById("numberInput").value;
+
+            // Check if the input is a valid number
+            if (isNaN(number) || number == "") {
+                alert('Please enter a valid number');
+                return;
+            }
+
+            // Check if the Web Worker is already running, if not create a worker object
+            if (typeof(worker) === "undefined") {
+                worker = new Worker("worker.js")
+            }
+
+            // Now, send the number to the Web Worker to work
+            worker.postMessage(number);
+
+            // Receive messages from the Web Worker after it done working
+            worker.onmessage = function(event) {
+                document.getElementById("result").innerText = event.data
+            };
+        }
+        
+        // Remeber to tell your Web Worker to stop working
+        function stopWorker() {
+            if (worker) {
+                worker.terminate();  // method
+                worker = undefined   // make your Web Worker no exist ... left from the work place :)
+                document.getElementById('result').innerText = 'Calculation stopped.';  // feedback
+            }
+        }
+
+
+
+        
+    </script>
+
+</body>
+</html>

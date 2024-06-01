@@ -1,0 +1,153 @@
+Remember, Web APIs is the broader category that includes Browser APIs, which are specific to web browsers, as well as other web-related APIs.
+
+
+Second:  Web History API
+------------------------
+The Browser History API provides a way for web developers to interact with the browser's history 
+(e,g. chrome browser history, go back, go forwrard, reload..etc ). 
+
+Technically, The Web History API provides easy METHODS and properties to access the windows.history object (Browser history). 
+(The window is where the content is displayed in the browser #different from the screen)
+
+The window.history object -> contain the URLs (Web Sites) visited by the user.
+
+## The Web History API is supported in all browsers.
+
+
+Again, Why Learn the Web/browser History API?
+Enhanced User Navigation:
+Understanding the Web History API allows developers to create web applications with intuitive navigation, similar to native applications.
+Example: 
+When you click the back button in your browser, it takes you to the previous page. 
+By using the back() method of the History API, developers can programmatically (in your web application) achieve the same effect, making it easier for users to navigate through the app without confusion.
+
+
+Single Page Applications (SPAs): 
+SPAs rely heavily on the History API to manage navigation without full page reloads, maintaining a seamless user experience.
+Example: 
+Consider a web app like Gmail or Facebook. 
+When you navigate to different sections (inbox, sent mail, profile), the URL changes, but the whole page doesn't reload. 
+This seamless navigation is achieved using the History API.
+
+State Management: (make sure to understand this point)
+Allows developers to manage the state of their applications more effectively, ensuring that users can navigate back to previous states.
+
+Example:
+Scenario: A user is filling out a multi-step survey. They navigate to another section of the app before completing the survey.
+Without History API: The user's progress might be lost if they navigate away and come back.
+
+With History API: The app can save the current step in the history state using pushState(). 
+When the user returns, the app restores the state, and the user continues from where they left off.
+
+
+
+
+
+Now!
+Part 1
+Key Methods of the History API
+------------------------------
+1. window.history.back()
+2. windwo.history.go()
+3. window.history.forward()
+(By the way, you can skip using window object before the history object, it it the same to use history.back())
+
+
+1. window.history.back()
+Description: The back() method loads the previous URL in the window.history list of URLs. This is equivalent to the user clicking the back button in the browser.
+Example:
+<button onclick="goBack()">Go Back</button>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+
+2. windwo.history.go()
+Description: The go() method loads a specific URL from the history list based on the relative position. 
+For example, window.history.go(-2) will load the URL two entries back in the history list.
+Example:
+<button onclick="goBackTwoPages()">Go Back 2 Pages</button>
+<script>
+  function goBackTwoPages() {
+    window.history.go(-2);
+  }
+</script>
+
+3. window.history.forward()
+Description: The forward() method loads the next URL in the window.history list. 
+This is equivalent to the user clicking the forward button in the browser.
+Example:
+<button onclick="goForward()">Go Forward</button>
+<script>
+  function goForward() {
+    window.history.forward();
+  }
+</script>
+
+
+
+
+History Object Properties
+1. window.history.length
+Description: The length property returns the number of entries (URLs) in the history list for the current session. 
+This can be useful for understanding how many pages the user has navigated through.
+Example:
+<p>Number of pages in history: <span id="historyLength"></span></p>
+<script>
+  document.getElementById('historyLength').textContent = window.history.length;
+</script>
+
+Full Example: historyAPI.html
+
+
+
+Part 2
+Advanced Usage of history API () # advanced methods
+As a developer, you need to manipulate the browser's history session. 
+History APIs enable you to to manipulate the browser's history stack (stack of URLs (pages or state of pages) you visited or changed).
+
+This is particularly useful for Single Page Applications (SPAs) where you need to control the navigation without causing full page reloads. 
+The key methods for advanced usage are pushState(), replaceState(), and handling the popstate event.
+
+1.window.history.pushState(stateObject, title, url); --> Adds a new entry/place(URL) to the history stack.
+2.window.history.replaceState(stateObject, title, url); --> Modifies the current entry in the history stack.
+3. handlig popstate Event --> Triggered when the active history entry changes (e.g., when the user clicks the back or forward buttons).
+
+
+1. pushState(stateObject, title, url)
+
+Let us understand these beautiful Parameters; stateObject, title, url
+stateObject: An object containing state data to be associated with the new history entry (like when open an image or fill a form in the same page).
+title: A string representing the title of the new history entry (currently ignored by most browsers).
+url: The URL to be displayed in the browser's address bar. This must be of the same origin as the current URL
+
+[when you browse back and forth, you notice the URL changes all the time, these URLs are either other pages in the history stack or same page but new state of the same page and got a unique URL]
+
+
+A use case that you might be familiar with:
+Use pushState() to add a new entry to the history stack when the user navigates within your SPA, 
+allowing them to bookmark or share the URL of the current state.
+
+
+2. replaceState(stateObject, title, url)
+Parameters:
+stateObject: An object containing state data to be associated (by replacing; not creating) with the history entry.
+title: A string representing the title of the history entry (currently ignored by most browsers).
+url: The URL to be displayed in the browser's address bar. This must be of the same origin as the current URL.
+(origin means: https + www.example.com = https://www.example.com)
+
+Use Case: Use replaceState() to modify the current history entry without adding a new entry. 
+This is useful when updating the state or URL of the current view without cluttering the history stack. (cleaver way to keep the history stack clean and nice)
+
+
+
+3. popstate Event: window.addEventListener('popstate', function(event){ .. code ...})
+
+Description: The popstate event is fired when the active history entry changes, such as when the user navigates using the browser's back or forward buttons.
+Use Case: Listen for the popstate event to update the UI based on the state of the history entry the user has navigated to.
+
+Full example: advanceHistoryAPI.html single page application example
+
+End
