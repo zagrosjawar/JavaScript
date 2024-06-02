@@ -9,7 +9,7 @@
 
 ## How to Use This Tutorial
 
-1. **Start by Reading the Text File in each subfolder:**
+1. **Start by Reading the Main Topic intro Text File  and then the txt file/files in each subfolder:**
    Begin by reading the accompanying text file for each topic to get an overview and understand the key concepts.
    
 2. **Copy and Analyze the Code:**
