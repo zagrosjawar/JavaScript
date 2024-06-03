@@ -1,0 +1,128 @@
+Remember, Web APIs is the broader category that includes Browser APIs, which are specific to web browsers, as well as other web-related APIs.
+
+Fivth: Web Fetch API:
+---------------------
+
+let us start learning Fetch API:
+The Fetch API is a modern interface that allows you to make HTTP requests (GET, POST, PUT, DELETE, ...) to servers from your web browsers. 
+It is more powerful and felxible alternative to the older "XMLHttpRequest" object. 
+
+With Fetch API, you can perform network requests similar to "XMLHttpRequest", but it provides a more powerful and flexible feature set.
+
+Basic Syntax:
+The basic syntax of the Fetch API involves calling the fetch function with a URL and then handling the response. Here's a simple example:
+- calling fetch function with a URL
+- then receiving and handling the resposne you get.
+
+Example:
+const url = 'https://example.com/data';
+fetch(url)
+  .then(response => response.text())       // converting response to text
+  .then(data => console.log(data))         // console logging data and have a look at it
+  .catch(error => console.error('Error:', error));   // if something goes wrong, catch it here
+
+
+Now, let us use async/await with fetch function to make asynchronous operations:
+Remember!
+- async and await are good frieds
+- to get a response you need to make a request first and await for the response
+- error happens ... take care of them by using try catch 
+
+Example:
+const url = 'https://example.com/data';
+async function fetchData() {
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
+        console.log(data);
+    } catch (error) {
+        console.error("Enter: ", error);
+    }
+}
+fetchData();
+
+
+a Big question: Why combining fetch function with async/await? isn't it adequate to retrieve data using only fetch function?
+If you have a smal project, like a course assignment... yes it is adequate to use only fetch function BUT 
+In real-world projects, using async/await in conjunction with the fetch function is highly recommended and often essential. 
+Because of: readability, maintainability, error handling.. modernity .. so be smart, be a modern developer!
+
+Simply put, if you want to make many requests ... you need to use a function (async/await) to reuse and make a lot of calls...
+so why not combining async/await/fetch ... in one asyncronous function?
+
+
+Now, we understand the relationship between fetch function and async/await keywords, let us work with JSON data.
+Handling JSON Data:
+------------------
+Most web APIs return data in JSON format. The Fetch API provides a method .json() to parse the JSON data directly. Here's an example:
+const apiURL = 'https://api.example.com/data';
+fetch(apiURL)
+  .then(response => response.json()) // convert data to json object
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+Now, let us be samrt and modern developers by using using async/await:
+const apiURL = 'https://api.example.com/data';
+
+async function fetchJsonData() {
+    try{
+        const response = await fetch(apiURL);
+        const data = response.json();
+        console.log(data);
+    }catch (error){
+        console.log("Error: ", error);
+    }
+}
+fetchJsonData();
+
+
+Right now, we are using fetch function combined with async/await to get data (using HTTP GET request)...from a server!.
+What about sending, modifying, deleting data on the server?
+
+First, as you know we have main HTTP methods, including GET, POST, PUT, and DELETE. 
+The Fetch API is versatile and can handle a variety of HTTP requests, making it a comprehensive tool for interacting with web servers. 
+
+Let us have some examples about POST, PUT, and DELETE request to the server.
+To send data to a server, you can use the fetch function with an options object (parameter) to specify the HTTP method, headers, and body of the request.
+
+1. POST Request
+The POST method is used to send data to a server to create a new resource.
+Fetch example:
+const data = { username: 'example' }; //Your data
+
+fetch('https://api.example.com/user', {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+})
+    .then(response => response.json())
+    .then(data => console.log("Success:", data))
+    .catch(error => console.error("Error:", error));
+
+
+Using async/await:
+
+async function postData(url="", data={}) {
+    consot response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify();
+    });
+    return response.json()
+}
+
+const urlAPI = 'https://api.example.com/user'
+const data = { username: 'example' };
+postData(urlAPI, data)
+    .then(data => console.log("Success:", data))
+    .then(error => console.log("Error:", error));
+
+
+The rest of the HTTP methods in:
+fetchAPI.html
+
+End

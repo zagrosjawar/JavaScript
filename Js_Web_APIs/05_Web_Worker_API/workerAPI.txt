@@ -1,0 +1,133 @@
+Remember, Web APIs is the broader category that includes Browser APIs, which are specific to web browsers, as well as other web-related APIs.
+
+Fourth: Web Wroker API
+--------------------------------
+
+When you have a lot of work to do, it is a good idea to delgate some of the work to a worker and you contiue doing your important stuff.
+
+OK!
+
+- What was the situation before the existence of Web Worker API?
+When you execute scripts in an HTML page or even when scripts are in external .js files, it often causes the page to become unresponsive (you cannot click or interact with the page) until
+script completes. This is because JavaScript in the main thread of a web page blocks the rendering and interaction process, which can lead to
+a poor user experience, especially for intensive computations.
+
+Here the Web Wroker API comes to solve this problem!
+
+A Web Worker is a JavaScript file that runs in the background, independently of other scripts in the HTML page. 
+This means you can continue interacting with the web page—clicking buttons, selecting items, scrolling, etc.—while the Web Worker runs its tasks
+ without affecting the page's performance.
+
+
+
+
+Example of Web Workers
+Let's walk through a simple example where a Web Worker counts numbers in the background (without effecting the page's performance).
+
+1- Before creating a Web Worker, it's good practice to check if the user's browser supports it:
+if (typeof(Worker) !== "undefined") {
+  // Yes! Web Worker support!
+  // Some code.....
+} else {
+  // Sorry! No Web Worker support..
+}
+
+2. we create an external JavaScript file, demo_workers.js, that contains the code for our Web Worker:
+let i = 0;
+
+function timedCount() {
+  i++;
+  postMessage(i);
+  setTimeout(timedCount, 500);
+}
+
+timedCount();
+
+In this code, postMessage(i); sends a message back to the main HTML page with the current count. 
+The setTimeout(timedCount, 500); calls timedCount() every 500 milliseconds.
+
+3. Next, we need to call this Web Worker from our HTML page. myWebWorker.html:
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Count numbers: <output id="result"></output></p>
+<button onclick="startWorker()">Start Worker</button>
+<button onclick="stopWorker()">Stop Worker</button>
+
+<script>
+let w;
+
+function startWorker() {
+  if (typeof(w) == "undefined") {
+    w = new Worker("demo_workers.js");
+  }
+  w.onmessage = function(event) {
+    document.getElementById("result").innerHTML = event.data;
+  };
+}
+
+function stopWorker() {
+  w.terminate();
+  w = undefined;
+}
+</script>
+
+</body>
+</html>
+
+Explanation
+--------------
+1. Starting the Worker:
+The startWorker() function creates a new Web Worker object if it doesn't already exist.
+
+new Worker("demo_workers.js") creates the Web Worker and runs the code in demo_workers.js.
+
+w.onmessage = function(event) { ... } sets up an event listener to handle messages from the Web Worker. 
+When the worker posts a message (remember postMessage(i) from demo_workers.js), the data (event.data) is displayed in the <output> element with the ID result.
+
+2. Stopping the Worker:
+The stopWorker() function stops the Web Worker using the terminate() method and then sets the worker variable w to undefined.
+
+Important:
+When a Web Worker is created/started, it continues to listen for messages even after the script has finished.
+To free up browser/computer resources, use the terminate() method:
+w.terminate();
+
+If we click start worker and stop worker again ... This means we are reusing our worker again and again!
+To reuse the Web Worker after it has been terminated, set the worker variable to undefined:
+w = undefined;
+
+
+Everything has limitaitons.. so, what are the Limitations of Web Workers?
+Web Workers run in a separate global context (in the "background"), so they do not have access to the following JavaScript objects:
+
+- window object (where our page is displayed in the browser to not "disturb" page performance)
+- document object (HTML DOM that represents the page and its element).
+- parent object  (the parent of the web worker).
+
+This means Web Workers cannot directly manipulate the DOM or access certain browser-specific objects and methods.
+
+
+The above example is very simple .. so, What are Real-World Usage of Web Workers?
+Web Workers are particularly useful for:
+
+- Data Processing: Performing heavy computations such as sorting large datasets, image processing, or cryptographic operations.
+- Real-Time Updates: Fetching and processing data from APIs without freezing the user interface.
+- Games and Animations: Running game logic or animations that require continuous and intensive computations.
+
+By offloading such tasks to Web Workers, you ensure that your web application remains responsive and provides a smoother user experience.
+
+
+Real World Example of a Web Worker
+Let's consider a real-world scenario where we use a Web Worker to perform an intensive computation, 
+such as calculating the factorial of a large number. 
+This task can be computationally expensive and may cause the main thread to become unresponsive if done directly. 
+By offloading this task to a Web Worker, we keep the main thread responsive.
+
+files:
+index.html
+worker.js
+
+
+End
