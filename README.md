@@ -15,12 +15,8 @@ In this project, I am delving deep into various JavaScript concepts, dedicating 
 
 ## Topics Covered So Far
 
-### JavaScript Web APIs folder:
-- Web Forms API
-- Web History API
-- Web Worker API
-- Web Fetch API
-- Web Geolocation API
+### JavaScript Web APIs 
+
 
 ## How to Use This Tutorial
 
