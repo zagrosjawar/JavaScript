@@ -15,17 +15,19 @@ In this project, I am delving deep into various JavaScript concepts, dedicating 
 
 ## Topics Covered So Far
 
-####JavaScript Web APIs 
-####JavaScript AJAX (Asynchronous JavaScript and XML) 
+#### JavaScript Web APIs 
+
+#### JavaScript AJAX (Asynchronous JavaScript and XML) 
 
 
 
-## How to Use This Tutorial
+## How to Use This Repo/Tutorial
 
-1. **Start by Reading the Text File:**
+1. **Start by Reading the Text File .txt:**
    Begin by reading the accompanying text file for each topic to get an overview and understand the key concepts.
+   Then you will find your way to corresponding project examples.
    
-2. **Copy and Analyze the Code:**
+3. **Copy and Analyze the Code:**
    Copy the provided `.html` and `.js` files to your code editor. Analyze the code and test your understanding by running and modifying it.
 
 ## Contribution
