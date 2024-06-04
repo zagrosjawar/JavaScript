@@ -1,0 +1,164 @@
+Fifth: AJAX PHP
+---------------
+(This part is not about learning PHP)
+
+1. PHP (Hypertext Preprocessor): 
+    is a popular open-source server-side (back end) scripting language designed for web development. 
+    It is embedded within HTML and is widely used to build dynamic web pages and applications.
+
+So, PHP is a scripting language that provide:
+    - Interactivity: 
+        AJAX (Asynchronous JavaScript and XML) combined with PHP allows for creating highly interactive web applications 
+        without needing to reload the entire web page. This enhances the user experience significantly.
+
+    - Server-Side Processing: 
+        PHP is excellent for server-side processing, such as handling form submissions, querying databases, 
+        and generating dynamic content. Learning AJAX PHP helps you integrate client-side interactivity with robust server-side functionalities.
+
+    - Wide Adoption: 
+        PHP remains one of the most widely used server-side languages. 
+        Many popular content management systems (CMS) like WordPress and Drupal are built with PHP, making it valuable for web developers.
+
+
+2. How PHP and Front End is Connected
+    The front end (client-side) interacts with the back end (server-side) through HTTP requests. 
+    AJAX allows the front end to communicate with the back end asynchronously, meaning the web page can update parts of 
+    the content dynamically without needing a full page reload. This is achieved through XMLHttpRequest (XHR) or Fetch API.
+
+
+3. AJAX PHP Example
+I prevously mentioned that we first create an XMLHttpRequest() object, t
+hen use its open() method: xhttp.open("GET", URL, true);
+The parameter "URL" can be any file on the server, such as .txt, .xml, .asp, .php, etc.
+Here in the example below, a request with get method and url = "gethint.php?q=" + str is sent,
+It handle the request and provide hints. 
+
+
+Example Code:
+index.html
+<!DOCTYPE html>
+<html>
+<body>
+<p><b>Start typing a name in the input field below:</b></p>
+
+<p>Suggestions: <span id="txtHint"></span></p>
+
+<form>
+    First name: <input type="text" onkeyup="showHint(this.value)">
+</form>
+
+<script>
+function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "gethint.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+PHP scripting file
+gethint.php
+<?php
+// Array with names
+$a[] = "Anna";
+$a[] = "Brittany";
+$a[] = "Cinderella";
+$a[] = "Diana";
+$a[] = "Eva";
+$a[] = "Fiona";
+$a[] = "Gunda";
+$a[] = "Hege";
+$a[] = "Inga";
+$a[] = "Johanna";
+$a[] = "Kitty";
+$a[] = "Linda";
+$a[] = "Nina";
+$a[] = "Ophelia";
+$a[] = "Petunia";
+$a[] = "Amanda";
+$a[] = "Raquel";
+$a[] = "Cindy";
+$a[] = "Doris";
+$a[] = "Eve";
+$a[] = "Evita";
+$a[] = "Sunniva";
+$a[] = "Tove";
+$a[] = "Unni";
+$a[] = "Violet";
+$a[] = "Liza";
+$a[] = "Elizabeth";
+$a[] = "Ellen";
+$a[] = "Wenche";
+$a[] = "Vicky";
+
+// Get the q parameter from URL
+$q = $_REQUEST["q"];
+
+$hint = "";
+
+// Lookup all hints from array if $q is different from ""
+if ($q !== "") {
+    $q = strtolower($q);
+    $len = strlen($q);
+    foreach($a as $name) {
+        if (stristr($q, substr($name, 0, $len))) {
+            if ($hint === "") {
+                $hint = $name;
+            } else {
+                $hint .= ", $name";
+            }
+        }
+    }
+}
+
+// Output "no suggestion" if no hint was found or output correct values
+echo $hint === "" ? "no suggestion" : $hint;
+?>
+
+
+Explanation of the code:
+
+HTML Structure:
+    - A simple form with an input field where users can type a name.
+    - A span element to display suggestions dynamically.
+
+
+JavaScript (AJAX Request):
+    - The showHint() function is triggered every time a key is released in the input field (onkeyup event).
+    - If the input field is empty, it clears the suggestions.
+    - If there is text in the input field, it creates an XMLHttpRequest object and sends a GET request to gethint.php with the current input value as a query parameter.
+    - When the server response is ready and successful, it updates the txtHint span with the response text.
+
+
+PHP (Server-Side Processing):
+    - An array of names is defined.
+    - The PHP script retrieves the q parameter from the URL.
+    - It searches the array for names that start with the input value ( "q=str").
+    - It returns matching names as a comma-separated string or "no suggestion" if no matches are found.
+
+
+Summary
+By combining AJAX with PHP, you can create highly interactive web applications. 
+The example demonstrates how to fetch data from a server dynamically as a user types, 
+providing instant feedback without requiring a page reload. 
+This technique enhances user experience and provides a seamless interaction between the client and server. 
+
+End

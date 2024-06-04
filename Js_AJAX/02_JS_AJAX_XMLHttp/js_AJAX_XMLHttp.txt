@@ -1,0 +1,135 @@
+First: AJAX HMLHttp object
+-------------------
+
+1. Introduction
+AJAX (Asynchronous JavaScript And XML) is a technique used for creating fast and dynamic web pages. 
+The keystone of AJAX is the (XMLHttpRequest object) , which allows you to:
+
+    - Exchange data with a web server behind the scenes.
+    - Update parts of a web page without reloading the entire page.
+
+
+2. Steps to Use AJAX
+    2.1 Create an XMLHttpRequest object.
+    2.2 Define a callback function.
+    2.3 Open the XMLHttpRequest object.
+    2.4 Send a request to a server.
+
+
+    2.1 Create an XMLHttpRequest object.
+    Syntax:
+    let xhttp = new XMLHttpRequest()         // object
+
+
+
+    2.2 Define a callback function.
+    A callback function is a function passed as a parameter to another function. 
+    In AJAX, the callback function contains the code to execute when the response from the server is ready (do what you wish with the data received).
+    before providing the Syntax, let us know what PROPERTIES an XMLHttpRequest Oject have:
+        .onload
+        .onreadystatechange
+        .readyState
+    Syntax:
+    xhttp.onload = function() {
+        // Your code to execute when the response is read
+    }
+
+
+    2.3 Open the XMLHttpRequest object and 2.4 Send a request to a server.
+    To send a request to a server, you use the open() and send() methods of the XMLHttpRequest object.
+    Syntax:
+    xhttp.open("GET", "ajax_info.txt");
+    xhttp.send();
+
+
+    Complete Example: JavaScript
+    // Create an XMLHttpRequest object
+    const xhttp = new XMLHttpRequest();
+
+    // Define a callback function
+    xhttp.onload = function() {
+    // Here you can use the data
+    document.getElementById("demo").innerHTML = this.responseText;
+    }
+
+    // Send a request
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send();
+
+
+
+
+
+3. Access Across Dominns ("problem") or Cross-Origin Resource Sharing (CORS):
+I advise you to read about CORS by follwoing this link: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+For security reasons, modern browsers do not allow access across domains. 
+This means both the web page and the file it tries to (request) load must be located on the SAME server.
+
+
+
+
+4. XMLHttpRequest Object Methods:
+
+    new XMLHttpRequest(): Creates a new XMLHttpRequest object.
+
+    abort(): The abort() method is used to cancel an ongoing XMLHttpRequest that has already been sent.
+
+    getAllResponseHeaders():  The getAllResponseHeaders() method of the XMLHttpRequest object returns all the response headers as a single string.
+
+    getResponseHeader():  Returns specific header information, e.g. xhr.getResponseHeader(headerName); 
+
+    open(method, url, async, user, psw): Specifies the request.
+            method: The request type (GET or POST or DELETE or PUT ..etc).
+            url: The file location or URL of the resource like json file data or image ..html page ...etc .
+            async: True (asynchronous) or False (synchronous).
+            user: Optional user name.
+            psw: Optional password.
+    
+    send(): Sends the request to the server (used for GET requests).
+    send(string): Sends the request to the server; ised for sending requests with a request body, commonly for POST, PUT, DELETE, or PATCH requests..
+    setRequestHeader(): The setRequestHeader() method of the XMLHttpRequest object is used to add custom HTTP headers to the request being sent to the server. 
+                        This method must be called after open() and before send().
+                        Example:
+                            xhr.setRequestHeader(headerName, headerValue);
+                                headerName: A string representing the name of the header.
+                                headerValue: A string representing the value of the header.
+                                // Setging custom headers
+                                xhr.setRequestHeader('Content-Type', 'application/json');
+
+
+
+5. XMLHttpRequest Object Properties:
+    .onload:             Defines a function to be called when the request is received (loaded).
+    .onreadystatechange: Defines a function to be called when the readyState property changes.
+
+    .readyState: Holds the status of the XMLHttpRequest.
+                0: Request not initialized.
+                1: Server connection established.
+                2: Request received.
+                3: Processing request.
+                4: Request finished and response is ready.
+            
+    .responseText: Returns the response data as a string.
+    .responseXML: Returns the response data as XML data.
+
+    .status: Returns the status-number of a request.
+                200: "OK".
+                403: "Forbidden".
+                404: "Not Found".
+    .statusText: Returns the status-text (e.g., "OK" or "Not Found").
+
+
+Full project example:
+
+user-management-system/
+├── index.html
+├── script.js
+├── styles.css
+└── db.json
+└── prerequisites.txt
+
+
+Start by reading prerequisites.txt first
+Happy learning.
+
+End

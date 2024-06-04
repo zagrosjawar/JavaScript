@@ -1,0 +1,86 @@
+1. Introduction to AJAX
+----------------------
+AJAX (Asynchronous JavaScript And XML) is a technique used to create fast and dynamic web pages. 
+It allows you to:
+- Read data from a web server after the page has loaded.
+- Update a web page without reloading the page.
+- Send data to a web server in the background.
+
+2.Key Features of AJAX:
+-----------------------
+- AJAX is not a programming language.
+- AJAX uses a combination of:
+    - A browser built-in XMLHttpRequest object to request data from a web server.
+    - JavaScript and HTML DOM to display or use the data.
+- AJAX allows web pages to be updated asynchronously by exchanging data with a web server behind the scenes. 
+  This means it is possible to update parts of a web page without reloading the whole page.
+
+
+3. Basic AJAX Example:
+----------------------
+Let us apply the previous intro into a practical example:
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+  <h2>Let AJAX change this text</h2>
+  <button type="button" onclick="loadDoc()">Change Content</button>       // User clicks the button and call loadDoc() function
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+script.js:
+function loadDoc() {
+  let xhttp = new XMLHttpRequest();              // XMLHttpRequest object is created
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {     // Success
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);      // The XMLHttpRequest object sends a request to a web server.
+  xhttp.send();
+}
+
+In this example:
+- The HTML page contains a <div> section and a <button>.
+- The <div> section is used to display information from a server.
+- The <button> calls a function (loadDoc()) when it is clicked.
+- The loadDoc() function requests data from a web server and displays it in the <div> section.
+
+How it works?
+1. An event occurs: A button is clicked in the web page.
+2. Creating XMLHttpRequest object: JavaScript (loadDoc() function) creates an XMLHttpRequest object.
+3. Sending a request: The XMLHttpRequest object sends a request to a web server.
+4. Server processes the request: The server processes the request.
+5. Server response: The server sends a response back to the web page.
+6. Reading the response: JavaScript reads the response.
+7. Updating the web page: JavaScript updates the part of the web page with the response data.
+
+
+Ok, let us see in more detail to understand the code:
+
+- XMLHttpRequest(): Creates a new XMLHttpRequest object.
+- onreadystatechange: Defines a function to be executed when the readyState changes.
+- readyState: Holds the status of the XMLHttpRequest. Possible values (of readyState) are:
+0: Request not initialized
+1: Server connection established
+2: Request received
+3: Processing request
+4: Request finished and response is ready
+- status: The HTTP status code of the response.
+200: "OK"
+404: "Not Found"
+
+- open("GET", "ajax_info.txt", true): Specifies the type of request, the URL, and whether the request should be handled asynchronously.
+- send(): Sends the request to the server.
+
+Conclusion
+AJAX is a powerful tool for web developers, allowing them to create dynamic and interactive web applications. 
+By using AJAX, you can read data from a server, send data to a server, and update web pages without reloading the entire page. 
+This makes web applications faster and more user-friendly.
+
+End of the AJAX intro.

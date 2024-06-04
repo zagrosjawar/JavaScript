@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript AJAX Application</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <h1>Cd Catalog - Album Information</h1>
+    <p>Click on a CD to display album information.</p>
+    <p id="showCD"></p>
+    <table id="cd-table"></table>
+
+
+    <script>
+        let cd;
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            const xmlDoc = xhttp.responseXML; 
+            cd = xmlDoc.getElementsByTagName("CD"); // It returns a collection of CDs
+            loadCD();
+        }
+        xhttp.open("GET", "cd_catalog.xml");
+        xhttp.send();
+
+
+        function loadCD() {
+            let table = "<tr><th>Artist</th><th>Title</th></tr>";
+            for (let i = 0; i < cd.length; i++) {
+                table += "<tr onclick=displayCD(" + i + ")>";
+                table += "<td>" + cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue; + "</td>";
+                table += "<td>" + cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue; + "</td>";
+                table += "</tr>";
+            }
+            document.getElementById("cd-table").innerHTML = table;
+        }
+
+        function displayCD(i) {
+            const artist = cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+            const title = cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+            const year = cd[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+
+            document.getElementById("showCD").innerHTML = 
+            "Artist: " + artist + "<br>" +
+            "Title: " + title + "<br>" +
+            "year: " + year; 
+        }
+
+        //End
+    </script>
+
+</body>
+</html>

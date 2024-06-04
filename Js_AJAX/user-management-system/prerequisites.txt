@@ -1,0 +1,41 @@
+
+Full project example:
+
+user-management-system/
+├── index.html
+├── script.js
+├── styles.css
+└── db.json
+└── prerequisites.txt
+
+
+
+db.json: This file simulates a server-side database for json-server and holds the user data.
+
+After you copy/clone the project.. make sure to check Prerequisites below:
+Prerequisites:
+1. First check if you have Node.js and npm already installed on your machin:
+type:  node -v in your terminal
+tyhpe: npm -v in your terminal
+If not:
+install or download Node.js and npm on your machine (https://nodejs.org/en)
+
+
+2. Install json-server Globally:
+npm install -g json-server
+
+
+3. Navigate to the Project Directory:
+cd path/to/user-management-system
+
+
+after you copy/clone/rewrite the project.. when testing it, first run jason-server to interaction with data db.json
+Run the following commant to start "json-server"
+                json-server --watch db.json
+
+
+Finally if something goes wrong... chatGPT is your friend.
+
+Happy learning.
+
+End

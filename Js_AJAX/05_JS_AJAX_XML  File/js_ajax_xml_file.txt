@@ -1,0 +1,111 @@
+Fourth: AJAX XML File
+---------------------
+
+1. Understanding XML
+XML (eXtensible Markup Language) is a markup language like HTML but designed to store and transport data. 
+It is both human-readable and machine-readable, making it a popular format for data exchange between systems. 
+XML uses a structure that includes elements, attributes, and a hierarchical format, which allows complex data 
+to be represented in a clear and organized manner.
+
+
+2. Key Features of XML:
+    - Hierarchical Structure: Data is organized in a tree structure with nested elements.
+    - Self-Descriptive: Each piece of data is wrapped in tags that describe the data.
+    - Platform Independent: XML can be used across different systems and platforms (mac or window ...etc).
+    - Extensible: You can define your own tags and structure.
+
+
+3. XML File Format for Data Exchange
+XML is widely used to exchange data over the internet and between different systems. It is particularly useful for:
+    - Configuration Files: Storing configuration settings for software applications.
+    - Data Interchange: Exchanging data between web services and applications.
+    - Document Storage: Storing document data in a structured format.
+
+
+4. AJAX and XML
+AJAX (Asynchronous JavaScript and XML) can be used to interact with XML files. This allows web pages to fetch and display data from XML files 
+without requiring a full page reload, resulting in a more dynamic and interactive user experience.
+
+AJAX XML Example
+Let's demonstrate how to use AJAX to fetch information from an XML file and display it on a web page.
+
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX XML Example</title>
+</head>
+<body>
+    <button onclick="loadDoc()">Get CD info</button>
+    <br><br>
+    <div id="demo"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+script.js
+function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() { myFunction(this); }  // this parameter referes the xhttp object
+    xhttp.open("GET", "cd_catalog.xml", true);
+    xhttp.send();
+}
+
+function myFunction(xml) {
+    const xmlDoc = xml.responseXML;
+    const x = xmlDoc.getElementsByTagName("CD");
+    let table = "<table><tr><th>Artist</th><th>Title</th></tr>";
+    for (let i = 0; i < x.length; i++) {
+        table += "<tr><td>" +
+            x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+            "</td><td>" +
+            x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+            "</td></tr>";
+    }
+    table += "</table>";
+    document.getElementById("demo").innerHTML = table;
+}
+
+
+
+
+Explanation of the Example
+HTML Structure:
+
+A button is provided for the user to click to fetch the CD information.
+An empty div with the ID demo is used to display the fetched data.
+JavaScript:
+
+The loadDoc function is triggered when the button is clicked.
+An XMLHttpRequest object (xhttp) is created and initialized with the open method to specify the request type (GET), 
+    the URL of the XML file (cd_catalog.xml), and set the request to be asynchronous (true).
+
+The onload function is defined to process the response when it is received.
+The send method is called to send the request to the server.
+The myFunction function processes the XML response, creating an HTML table from the data and inserting it into the demo div.
+XML File:
+
+The XML file (cd_catalog.xml) contains a list of CD entries, each with a TITLE and ARTIST element.
+
+
+
+
+
+
+
+Summary
+Using AJAX to fetch and display data from an XML file allows for interactive and dynamic web pages. 
+By understanding how to work with XMLHttpRequest and XML data, you can create web applications that 
+efficiently communicate with servers and provide a seamless user experience.
+
+Full Project example (inside JS_AJAX_XML File folder):
+ajax_example/
+├── index.html
+├── script.js
+├── styles.css
+└── cd_catalog.xml
+
+
+End

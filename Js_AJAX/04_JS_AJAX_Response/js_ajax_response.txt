@@ -1,0 +1,150 @@
+Third: AJAX response 
+----------------------
+
+After creating XMLHttpRequest object
+"Setting up" your request and sending it
+You always get a response (data or status message)
+
+
+AJAX Response
+When an AJAX request is made, the server sends back a response that can be handled in various ways 
+depending on the 1. properties and 2. methods of the XMLHttpRequest object. 
+Here, we'll explore how to work with:
+- server responses properties using:  responseText, responseXML.
+- server response methods like getResponseHeader() and getAllResponseHeaders().
+
+and We'll also look at some additional useful properties and methods.
+
+
+1. Server Response Properties
+    .responseText
+            Description: The responseText property returns the server response as a JavaScript string.
+            Usage: You can use this property to display the server response directly in your web page or process it further with JavaScript.
+            Example:
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        document.getElementById("demo").innerHTML = xhttp.responseText; //text
+                    };
+                    xhttp.open("GET", "ajax_info.txt", true);
+                    xhttp.send();
+
+    .responseXML
+            Description: The responseXML property returns the server response as an XML DOM object. 
+                         This is useful when the server returns XML data that needs to be parsed.
+            Usage: You can traverse the XML document using standard DOM methods and properties.
+            Example:
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        const xmlDoc = xhttp.responseXML;    // data as XML document
+                        const x = xmlDoc.getElementsByTagName("ARTIST");
+                        let txt = "";
+                        for (let i = 0; i < x.length; i++) {
+                            txt += x[i].childNodes[0].nodeValue + "<br>";
+                        }
+                        document.getElementById("demo").innerHTML = txt;
+                    };
+                    xhttp.open("GET", "cd_catalog.xml", true);
+                    xhttp.send();
+
+                    In this example, the server response is parsed as an XML document, and the text content of each <ARTIST> element
+                    is displayed in the demo element.
+
+
+    Additional Response Properties
+    .status
+            Description: The status property returns the numerical status code of the response.
+            Usage: This property is useful for determining if the request was successful (e.g., 200 for OK).
+            Example:
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        if (xhttp.status === 200) {    //Status number
+                            console.log("Request successful");
+                        } else {
+                            console.log("Request failed");
+                        }
+                    };
+                    xhttp.open("GET", "ajax_info.txt", true);
+                    xhttp.send();
+
+    .statusText
+            Description: The statusText property returns the status text (e.g., "OK" or "Not Found") corresponding to the status code.
+            Usage: This property can be used to get a human-readable status of the response.
+            Example:
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        console.log("Status: " + xhttp.statusText);    //Status Text
+                    };
+                    xhttp.open("GET", "ajax_info.txt", true);
+                    xhttp.send();
+
+
+
+2. Server Response Methods:
+    .getAllResponseHeaders()
+    .getResponseHeader()
+
+
+    .getAllResponseHeaders()
+            Description: The getAllResponseHeaders() method returns all the header information (all lines of the header info) from the server response as a single string.
+            Usage: This method is useful for debugging purposes or when you need to examine the headers returned by the server.
+            Example:
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        document.getElementById("demo").innerHTML = this.getAllResponseHeaders();  // Display header info or you can console.log() it
+                    };
+                    xhttp.open("GET", "ajax_info.txt", true);
+                    xhttp.send();
+
+            Example Output:
+                    cache-control: public, max-age=14400
+                    content-type: application/json; charset=utf-8
+                    expires: Thu, 31 Dec 2037 23:55:55 GMT
+                    last-modified: Tue, 15 Nov 1994 12:45:26 GMT
+                    vary: Accept-Encoding
+            
+            In this example, all response headers are retrieved and displayed in the demo element.
+
+
+
+    getResponseHeader()
+            Description: The getResponseHeader() method returns the value of a specified response header from the server.
+            Usage: This method is useful when you need specific information from the server response headers, such as content type, date, or custom headers.
+            Example:
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        document.getElementById("demo").innerHTML = this.getResponseHeader("Last-Modified"); //Display specific header info
+                    };
+                    xhttp.open("GET", "ajax_info.txt", true);
+                    xhttp.send();
+                    
+            Example Output:
+                    Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
+            
+            In this example, the value of the Last-Modified header is retrieved and displayed in the demo element.
+
+
+
+Check out the Full project Example folder and try to console log data using the above properties and methods of Server Response Properties and Methods:
+
+user-management-system/
+├── index.html
+├── script.js
+├── styles.css
+└── db.json
+└── prerequisites.txt
+
+
+
+
+Summary
+    responseText: Used to get the response data as a string. Suitable for plain text or JSON responses.
+    responseXML: Used to get the response data as an XML DOM object. Suitable for XML responses.
+
+    status: Returns the numerical status code of the response. Useful for checking if the request was successful.
+    statusText: Returns the status text corresponding to the status code. Provides a human-readable status.
+
+    getAllResponseHeaders(): Returns all the headers from the server response as a single string. Useful for debugging and inspecting headers.
+    getResponseHeader(header): Returns the value of a specific header from the server response. Useful for retrieving specific header information.
+
+By using these properties and methods, you can effectively handle and process server responses in your AJAX applications, 
+ensuring dynamic and responsive web interactions.

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript AJAX Application</title>
+</head>
+<body>
+    <p>This example demonstrates some HTML application using XML, HTTP, DOM, and JavaScript.</p>
+    <div id="showCD"></div>
+
+
+    <script>
+        // This example shows the first CD Artist, Title and Year
+
+        // Create a XMLHttpRequest Object
+        const xhttp = new XMLHttpRequest();
+
+        // Only when request is sent and processed and response if back from the server
+        xhttp.onload = function() {
+            const xmlDoc = xhttp.responseXML;
+            // Now you got xmlDoc as XML format... Dom navigation
+            const cd = xmlDoc.getElementsByTagName("CD") // All CD xml elements
+
+            //Call myFunction
+            myFunction(cd, 0)
+        }
+
+        // Send the request (open() + send())
+        xhttp.open("GET", "cd_catalog.xml", true);
+        xhttp.send();
+
+
+
+        function myFunction(cd, i) {
+            const artist = cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+            const title = cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+            const year = cd[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+
+            document.getElementById("showCD").innerHTML = 
+            "Artist: " + artist + "<br>" +
+            "Title: " + title + "<br>" +
+            "year: " + year; 
+
+
+
+        }
+
+    </script>
+</body>
+</html>
