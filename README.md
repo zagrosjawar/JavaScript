@@ -15,7 +15,9 @@ In this project, I am delving deep into various JavaScript concepts, dedicating 
 
 ## Topics Covered So Far
 
-### JavaScript Web APIs 
+####JavaScript Web APIs 
+####JavaScript AJAX (Asynchronous JavaScript and XML) 
+
 
 
 ## How to Use This Tutorial
