@@ -1,0 +1,173 @@
+Sixth: JSON Objects and Arrays
+------------------------------
+
+A quick review of JSON Objects and Arrays and how to loop through them after parsing.
+
+
+Part 1: JSON Objects:
+--------------------
+# JSON Objects:
+    A JSON object is a collection of key/value pairs surrounded by curly braces {}. 
+    Here is a basic JSON object:
+    {"name":"John", "age":30, "car":null}
+
+
+# Creating JavaScript Objects from JSON:
+    You can create a JavaScript object from a JSON string using JSON.parse(). Here's an example:
+
+    Example: Parsing a JSON String
+    -------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JSON Object Example</title>
+    </head>
+    <body>
+        <p id="demo"></p>
+        <script>
+                // JSON string
+            const myJSON = '{"name":"John", "age":30, "car":null}';
+                // parsing json to create a js object
+            const myObj = JSON.parse(myJSON);
+                                                        // Accessing JS object
+            document.getElementById("demo").innerHTML = myObj.name + ", " + myObj.age;
+        </script>
+    </body>
+    </html>
+    --------------
+
+# Looping Through an Object
+    You can loop through all properties of a JavaScript object using a for-in loop:
+
+    Example: Looping Through Object Properties
+    --------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Looping Through Object Properties</title>
+    </head>
+    <body>
+        <p id="demo"></p>
+        <script>
+            const myJSON = '{"name":"John", "age":30, "car":null}';
+            const myObj = JSON.parse(myJSON);
+
+            let text = "";
+            for (const key in myObj) {
+                text += key + ": " + myObj[key] + "<br>";
+            }
+            document.getElementById("demo").innerHTML = text;
+        </script>
+    </body>
+    </html>
+
+
+
+
+
+Part 2: JSON Arrays
+------------------
+A JSON array is a collection of values surrounded by square brackets []. 
+Here is a basic JSON array:
+    ["Ford", "BMW", "Fiat"]
+
+# Creating JavaScript Arrays from JSON
+You can create a JavaScript array from a JSON string using JSON.parse(). 
+Here's an example:
+
+Example: Parsing a JSON Array
+--------
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JSON Array Example</title>
+    </head>
+    <body>
+        <p id="demo"></p>
+        <script>
+                            // JSON array
+            const myJSON = '["Ford", "BMW", "Fiat"]';
+                            // Parse it
+            const myArray = JSON.parse(myJSON);
+                            // Access it
+            document.getElementById("demo").innerHTML = myArray[0];
+        </script>
+    </body>
+    </html>
+
+
+# Arrays in Objects
+A JSON object can contain arrays as values. 
+Here is an example of a JSON object containing an array:
+    {
+        "name": "John",
+        "age": 30,
+        "cars": ["Ford", "BMW", "Fiat"]
+    }
+
+
+# Example: Accessing Array Values in an Object
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array in Object Example</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script>
+        const myJSON = '{"name": "John", "age": 30, "cars": ["Ford", "BMW", "Fiat"]}';
+        const myObj = JSON.parse(myJSON);
+                                                    // object.array[index]
+        document.getElementById("demo").innerHTML = myObj.cars[0]; // Accessing the first element of the cars array
+    </script>
+</body>
+</html>
+
+
+
+# Looping Through an Array
+You can loop through the values of an array in a JSON object using a for loop or a regular for loop.
+
+Example: Looping Through Array Values
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looping Through Array Values</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script>                                                // Array
+        const myJSON = '{"name": "John", "age": 30, "cars": ["Ford", "BMW", "Fiat"]}';
+        const myObj = JSON.parse(myJSON);
+
+        let text = "";
+                            // Array
+        for (let i = 0; i < myObj.cars.length; i++) {
+            text += myObj.cars[i] + "<br>";
+        }
+        document.getElementById("demo").innerHTML = text;
+    </script>
+</body>
+</html>
+
+
+Check out: emplyee_manangement.html
+
+Conclusion
+Understanding JSON objects and arrays is crucial for handling data in web applications. 
+JSON objects are collections of key/value pairs, and arrays are ordered lists of values. 
+By using JSON.parse() and JSON.stringify(), you can easily convert between JSON strings and JavaScript objects/arrays, 
+making it simple to exchange data with a web server.
+
+End

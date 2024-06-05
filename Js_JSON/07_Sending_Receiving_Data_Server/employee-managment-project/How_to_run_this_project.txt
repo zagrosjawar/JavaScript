@@ -1,0 +1,36 @@
+What is db.json?
+db.json is a simple JSON file that serves as a mock database for your project. 
+It contains data in JSON format that json-server uses to create a RESTful API. 
+This allows you to perform CRUD (Create, Read, Update, Delete) operations as if 
+you were interacting with a real backend.
+
+
+How to Check if json-server is Installed on your system:
+    open your terminal or command prompt and run the following command:
+    json-server -v
+
+If json-server is not installed:
+    npm install -g json-server
+
+
+How to Run json-server with db.json (to see updates in your db.json)
+    1. Create Your db.json File (Already created)
+    2. Navigate to Your Project Directory: cd path/to/your/project
+    3. Run json-server:
+        json-server --watch db.json
+
+    4. Access the Mock API:
+        http://localhost:3000/employees
+
+    5. Challenge: if you want to PUT or DELETE an employee:
+    write a new function for PUT request
+    write a new function for DELETE request
+    check employee "id" to choose correct automatically generated "id" to PUT or DELETE
+    Use this url: http://localhost:3000/employees/{id}
+
+
+if You see this erro: net::ERR_CONNECTION_REFUSED
+It means you did not run this command: json-server --watch db.json
+
+
+Good Luck ;

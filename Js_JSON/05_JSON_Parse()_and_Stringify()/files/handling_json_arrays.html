@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Array Example</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <p id="demo1"></p>
+
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                // Response came as text..convert it to javaScript array
+                var myArr = JSON.parse(this.responseText);
+                document.getElementById("demo").innerHTML = myArr[0]; // John
+                document.getElementById("demo1").innerHTML = myArr[1]; // Peter
+            }
+        };
+        //Get json_demo_array.txt
+        xmlhttp.open("GET","json_demo_array.txt", true);
+        xmlhttp.send();
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+First: JSON Intro
+-----------------
+
+
+1. What is JSON?
+----------------
+JSON stands for JavaScript Object Notation
+JSON is a text format for storing and transporting data (file with data/information -- you send and receive on a network)
+JSON is "self-describing" and easy to understand (No weired symbols or syntax)
+
+(Every time I hear JSON, i think of JavaScript object {} and string "" )
+
+
+2. What does JSON look like?
+----------------------------
+JSON simple Example:
+{
+    "name":"John", 
+"age":30, 
+"car":null
+}
+
+Or consider this example: source: https://json.org/example
+
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+
+
+
+
+JSON and XML are text-based, human-readable file formatsthat can be created, read, and decoded in real-world software. 
+Both are hierarchical text notations for ->data exchange that are -> not language-specific.
+
+
+The simple JSON example defiens an object with 3 properties:
+- name
+- age
+- car
+Each property has a value: "john", 30 and null
+
+
+
+3. How to access JSON data?
+---------------------------
+If you parse the JSON string with a JavaScript program, you can access the data as an object:
+
+let personName = obj.name;
+let personAge = obj.age;
+
+
+Agin, What is JSON?
+JSON stands for JavaScript Object Notation
+JSON is a lightweight data-interchange format
+JSON is plain text written in JavaScript object notation
+JSON is used to send data between computers
+JSON is language independent
+
+ --> The JSON syntax is derived from JavaScript object notation, but the JSON format is "text" only.
+
+
+4.Why use JSON?
+The JSON format is syntactically similar to the code for creating JavaScript objects (have a look at JavaScript objects syntax). 
+Because of this, a JavaScript program can easily convert JSON data into JavaScript objects.
+
+Since the format is text only, JSON data can easily be sent between computers, and used by any programming language.
+
+JavaScript has a built in function for converting JSON strings into JavaScript objects:
+    JSON.pars() 
+JavaScript also has a built in function for converting an object into a JSON string:
+    JSON.stringify()  
+
+This means that: 
+You can receive pure text from a server and use it as a JavaScript object.
+You can send a JavaScript object to a server in pure text format.
+(In the next subsections this will be clear to you .. no worries)
+
+
+Summary:
+JSON makes it possible to store JavaScript objects as text.
+
+End

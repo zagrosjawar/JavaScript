@@ -1,0 +1,110 @@
+Second: JSON Syntax
+-------------------
+
+JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans to read and write, 
+and easy for machines to parse and generate. The JSON syntax is a subset of JavaScript syntax.
+
+
+1. JSON Sytax Rules:
+-----------------
+The JSON syntax is derived from JavaScript object notation syntax and includes the following rules:
+    Data is in name/value pairs.
+    Data is separated by commas.
+    Curly braces {} hold objects.
+    Square brackets [] hold arrays.
+
+
+JSON Data - A Name and a Value
+-------------------------------
+JSON data is written as name/value pairs. 
+A name/value pair consists of a field name (in double quotes), followed by a colon, followed by a value.
+
+Example:
+        {
+            "name": "John"
+        }
+JSON names require double quotes. JavaScript names don't.
+
+
+
+JSON - Evaluates to JavaScript Objects (by using the built in function JSON.pars() )
+--------------------------------------
+The JSON format is almost identical to JavaScript objects. However, there are some differences:
+        In JSON, keys must be strings and written with double quotes:
+            { "name": "John" }
+
+        In JavaScript, keys can be strings, numbers, or identifier names:
+            { name: "John" }
+
+
+
+JSON Values
+------------
+In JSON, values must be one of the following data types:
+
+A string     "John"
+A number      39
+An object (JSON object)     {"name":"Alan"}
+An array     []
+A boolean    true
+null         null
+
+
+In JavaScript, values can be all of the ABOVE, plus any other valid JavaScript expression, including:
+A function 
+A date        
+undefined
+
+In JSON, you write string values with double quotes.
+In JavaScript, you can write string values with double or single quotes.
+
+
+JavaScript Objects
+------------------
+Because JSON syntax is derived from JavaScript object notation, very little extra software is needed to work with JSON within JavaScript.
+
+With JavaScript, you can create an object and assign data to it like this:
+Example:
+let person = { name: "John", age: 31, city: "New York" };
+
+You can access a JavaScript object like this:
+        // returns John
+        person.name;
+
+It can also be accessed like this:
+        // returns John
+        person["name"];
+
+Data can be modified like this:
+        person.name = "Gilbert";
+        Or
+        person["name"] = "Gilbert";
+
+
+Converting JavaScript Objects to JSON (by using the built in function JSON.strigify() )
+-------------------------------------
+You will learn in practice how to convert JavaScript objects into JSON later in this tutorial.
+
+JavaScript Arrays as JSON
+-------------------------
+Just like JavaScript objects, JavaScript arrays can also be used as JSON.
+JavaScript Array:
+    let people = [
+    { name: "John", age: 31, city: "New York" },
+    { name: "Jane", age: 29, city: "Chicago" }
+    ];
+
+You will learn more about arrays as JSON later in this tutorial.
+
+
+2. SON Files
+----------
+The file type for JSON files is .json.
+The MIME type for JSON text is application/json.
+
+
+This concludes the basic introduction to JSON syntax and its similarities and differences with JavaScript object notation. 
+Next, you will learn how to parse JSON data and convert JavaScript objects to JSON format.
+
+
+End

@@ -1,0 +1,47 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "age": 30,
+      "skills": [
+        "JavaScript",
+        "React"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "age": 25,
+      "skills": [
+        "Python",
+        "Django"
+      ]
+    },
+    {
+      "id": "60bb",
+      "name": "Zagros",
+      "age": 30,
+      "skills": [
+        "Python3"
+      ]
+    },
+    {
+      "id": "106d",
+      "name": "Zagros",
+      "age": 30,
+      "skills": [
+        "Python3",
+        " JavaScript"
+      ]
+    },
+    {
+      "id": "6043",
+      "name": "Zagros",
+      "age": 30,
+      "skills": [
+        "Python3"
+      ]
+    }
+  ]
+}

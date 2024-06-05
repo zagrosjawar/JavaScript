@@ -1,0 +1,114 @@
+Third: JSON VS XML
+-------------------
+
+Both JSON (JavaScript Object Notation) and XML (eXtensible Markup Language) can be used to receive and send data to a web server. 
+While they share some similarities, they also have distinct differences that make JSON often more advantageous in certain contexts.
+
+
+1. JSON Example
+------------
+Here's an example of a JSON object defining an employees array with three employees:
+{
+  "employees": [
+    { "firstName": "John", "lastName": "Doe" },
+    { "firstName": "Anna", "lastName": "Smith" },
+    { "firstName": "Peter", "lastName": "Jones" }
+  ]
+}
+
+
+2. XML Example
+-----------
+The same data in XML format would look like this:
+<employees>
+  <employee>
+    <firstName>John</firstName>
+    <lastName>Doe</lastName>
+  </employee>
+  <employee>
+    <firstName>Anna</firstName>
+    <lastName>Smith</lastName>
+  </employee>
+  <employee>
+    <firstName>Peter</firstName>
+    <lastName>Jones</lastName>
+  </employee>
+</employees>
+
+
+3. JSON is Like XML Because
+------------------------
+    Both JSON and XML are "self-describing" (human-readable).
+    Both JSON and XML are hierarchical (values within values).
+    Both JSON and XML can be parsed and used by many programming languages.
+    Both JSON and XML can be fetched with an XMLHttpRequest.
+
+
+4. JSON is Unlike XML Because
+--------------------------
+    JSON doesn't use end tags.
+    JSON is shorter.
+    JSON is quicker to read and write.
+    JSON can use arrays.
+
+    The biggest difference is that XML has to be parsed with an XML parser, 
+    while JSON can be parsed by a standard JavaScript function.
+
+
+5. Why JSON is Better Than XML
+------------------------------
+    XML is much more difficult to parse than JSON.
+    JSON is parsed into a ready-to-use JavaScript object.
+    For AJAX applications, JSON is faster and easier than XML.
+
+    5.1 Using XML
+        Fetch an XML document.
+        Use the XML DOM to loop through the document.
+        Extract values and store them in variables.
+
+    5.2 Using JSON
+        Fetch a JSON string.
+        Parse the JSON string with JSON.parse().
+
+
+
+Example: Using JSON in JavaScript
+---------------------------------
+    let jsonString = '{"employees":[{"firstName":"John","lastName":"Doe"},
+                                    {"firstName":"Anna","lastName":"Smith"},
+                                    {"firstName":"Peter","lastName":"Jones"}]}';
+                                    
+    let obj = JSON.parse(jsonString);
+
+    console.log(obj.employees[0].firstName); // Output: John
+
+
+Example: Using XML in JavaScript
+--------------------------------
+    Here's an example of fetching an XML string and parsing it using the DOM parser:
+    let xmlString = `<employees>
+                   <employee>
+                     <firstName>John</firstName>
+                     <lastName>Doe</lastName>
+                   </employee>
+                   <employee>
+                     <firstName>Anna</firstName>
+                     <lastName>Smith</lastName>
+                   </employee>
+                   <employee>
+                     <firstName>Peter</firstName>
+                     <lastName>Jones</lastName>
+                   </employee>
+                 </employees>`;
+
+    // Create a parser/reader   
+    let parser = new DOMParser();
+    let xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+// XML Document DOM navigation
+console.log(xmlDoc.getElementsByTagName("firstName")[0].childNodes[0].nodeValue); // Output: John
+
+As seen in the examples above, JSON provides a more streamlined and efficient way to handle data compared to XML, 
+especially when working within JavaScript environments.
+
+End

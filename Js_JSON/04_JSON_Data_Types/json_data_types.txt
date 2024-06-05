@@ -1,0 +1,145 @@
+Fourth: JSON Data Types (values)
+--------------------------------
+
+1. JSON Values:
+----------------
+In JSON, values must be one of the following data types:
+- A string
+- A number
+- An object (JSON object)
+- An array
+- A boolean
+- null
+
+JSON values cannot be one of the following data types:
+A function
+A date
+undefined
+
+
+
+1.1 JSON Strings
+    Strings in JSON must be written in double quotes.
+        {
+            "name": "John"
+        }
+
+
+1.2 JSON Numbers
+    Numbers in JSON can be integers or floating-point numbers.
+    {
+        "age": 30
+    }
+    {
+        "price": 29.99
+    }
+
+
+1.3 JSON Objects
+    Values in JSON can be objects, which are collections of key/value pairs.
+    Objects as values in JSON must follow the same rules as JSON objects.
+    {
+    "employee": {
+        "name": "John",
+        "age": 30,
+        "city": "New York"
+        }
+    }
+
+1.4 JSON Arrays
+    Values in JSON can be arrays, which are ordered lists of values.
+    {
+    "employees": ["John", "Anna", "Peter"]
+    }
+
+    Or Array of object items: [{}, {}, {}]
+    {
+        "employees": [
+            {
+            "firstName": "John",
+            "lastName": "Doe",
+            "age": 30,
+            "position": "Developer"
+            },
+            {
+            "firstName": "Anna",
+            "lastName": "Smith",
+            "age": 25,
+            "position": "Designer"
+            },
+            {
+            "firstName": "Peter",
+            "lastName": "Jones",
+            "age": 45,
+            "position": "Manager"
+            }
+        ]
+        }
+
+
+1.5 JSON Booleans
+    in JSON can be boolean values: true or false.
+        {
+         "sale": true,
+         "payed": false,
+        }
+
+1.6 JSON null (do not confuse null with undefined)
+    Values in JSON can be null, representing the intentional absence of any value.
+    {
+    "middlename": null
+    }
+
+
+
+2. Examples in Practice
+Let's see how these data types can be used together in a more complex JSON structure.
+Note that the company has no website yet therfore it is null but it could has a website in future.
+{
+  "company": "TechCorp",
+  "employees": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "age": 30,
+      "married": false,
+      "children": null,
+      "skills": ["JavaScript", "React", "Node.js"],
+      "address": {
+        "street": "123 Main St",
+        "city": "New York",
+        "zip": "10001"
+      }
+    },
+    {
+      "firstName": "Anna",
+      "lastName": "Smith",
+      "age": 25,
+      "married": true,
+      "children": 2,
+      "skills": ["Python", "Django"],
+      "address": {
+        "street": "456 Elm St",
+        "city": "San Francisco",
+        "zip": "94101"
+      }
+    }
+  ],
+  "isHiring": true,
+  "website": null
+}
+
+
+In this example:
+    - The whole data is an object
+    - company is a string.
+    - employees is an array of objects.
+    - Each employee object contains various data types including strings, numbers, booleans, arrays, objects, and null values.
+    - isHiring is a boolean.
+    - website is null.
+
+
+Understanding these data types and how they can be combined is essential 
+for working with JSON effectively in your JavaScript applications.
+
+End

@@ -1,0 +1,215 @@
+Seventh: JSON and Interacting with the Server (backend)
+
+Sending and Receiving Data with Fetch API and XMLHttpRequest
+------------------------------------------------------------
+
+
+You can request data by sending a request on a network to a server by using two methods:
+    1. Fetch API
+    2. XMLHttpRequest
+
+This tutorial will show you how converting json to js nad vice versa when using both methods.
+
+
+1. Introduction
+---------------
+In this final part of our JSON tutorial, we will explore how to send and receive data 
+to and from a web server using both the Fetch API and XMLHttpRequest.
+
+We will cover the HTTP methods GET, POST, PUT, and DELETE. 
+At the end, we will gather all the example parts into a single HTML, CSS, and JavaScript project.
+
+2. Fetch API and XMLHttpRequest Overview
+---------------------------------------
+    Fetch API: The Fetch API provides a modern and flexible interface for making network requests. 
+               It's more powerful and easier to use compared to XMLHttpRequest.
+    
+    XMLHttpRequest: XMLHttpRequest is an older way to interact with servers via HTTP. 
+                    It’s widely supported and can be used for making network requests.
+
+
+3. HTTP Methods
+---------------
+    GET
+    Used to request data from a specified resource.
+
+    POST
+    Used to send data to a server to create/update a resource.
+
+    PUT
+    Used to send data to a server to update a resource.
+
+    DELETE
+    Used to delete a specified resource.
+
+    (There are other HTTP Methods, but the above are the major ones.)
+
+
+4. Examples Using Fetch API and XMLHttpRequest and JSON 
+-------------------------------------------------------
+    4.1 GET Request
+    ---------------
+        Fetch API Example:
+            <script>
+                fetch('https://jsonplaceholder.typicode.com/posts/1')
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error('Error:', error));
+            </script>
+        
+       XMLHttpRequest Example:
+            <script>
+                let xhr = new XMLHttpRequest();
+
+                xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/1', true);
+                xhr.onload = function () {
+                    // Successful responses (200 – 299)
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log(JSON.parse(xhr.responseText));
+                    } else {
+                        console.error('Error:', xhr.statusText);
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error('Request failed');
+                };
+                xhr.send();
+            </script>
+    
+    4.2 POST Request
+    ----------------
+        FEtch API Exmaple:
+            <script>
+                let url = 'https://jsonplaceholder.typicode.com/posts/1';
+                fetch(url, {
+                    method: "POST",
+                    headers: {"content-Type": "application/json"},
+                    body: JSON.stringify({
+                        title: "foo",
+                        body: "bar", 
+                        userID: 1
+                    })
+
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+            </script>
+
+
+        XMLHttpRequest Example:
+                let url = 'https://jsonplaceholder.typicode.com/posts';
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                            console.log(JSON.parse(xhr.responseText));
+                        } else {
+                            console.error('Error:', xhr.statusText);
+                        }
+                };
+                xhr.onerror = function () {
+                    console.error('Request failed');
+                };
+
+                xhr.send(JSON.stringify({
+                    title: 'foo',
+                    body: 'bar',
+                    userId: 1
+                }));
+
+
+    4.3 PUT Request
+    ---------------
+        Fetch API Example
+            <script>
+                fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: 1,
+                        title: 'foo',
+                        body: 'bar',
+                        userId: 1
+                    })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+            </script>
+
+
+        XMLHttpRequest Example
+            <script>
+                let xhr = new XMLHttpRequest();
+                xhr.open('PUT', 'https://jsonplaceholder.typicode.com/posts/1', true);
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log(JSON.parse(xhr.responseText));
+                    } else {
+                        console.error('Error:', xhr.statusText);
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error('Request failed');
+                };
+                xhr.send(JSON.stringify({
+                    id: 1,
+                    title: 'foo',
+                    body: 'bar',
+                    userId: 1
+                }));
+            </script>
+
+    4.4 DELETE Request
+    ------------------
+        Fetch API Example
+            <script>
+                fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Deleted successfully');
+                    } else {
+                        console.error('Delete failed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            </script>
+
+
+        XMLHttpRequest Example
+            <script>
+                var xhr = new XMLHttpRequest();
+                xhr.open('DELETE', 'https://jsonplaceholder.typicode.com/posts/1', true);
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log('Deleted successfully');
+                    } else {
+                        console.error('Delete failed');
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error('Request failed');
+                };
+                xhr.send();
+            </script>
+
+
+
+Now it is time to check out the full project:
+employee-management-project/
+│-- How_to_run_this_project.txt
+├── index.html
+├── style.css
+└── script.js
+
+
+ 
+Happy Learning ;

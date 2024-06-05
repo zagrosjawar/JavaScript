@@ -1,0 +1,169 @@
+Fifth: JSON Parse and Stringify
+-------------------------------------
+- JSON.parse()
+- JSON.stringify()
+
+After a detailed Intro and JSON syntax, it is time to use what you have learned.
+
+So far, you have learned that a A common use of JSON is to exchange data to/from a web server.
+
+When receiving data from a web server, the data is always a string.
+
+
+Improtant:
+----------
+In this tutorial, we'll cover how to use JSON.parse() to convert JSON strings into JavaScript objects, 
+and JSON.stringify() to convert JavaScript objects into JSON strings. 
+
+We'll also provide complete examples to demonstrate these concepts.
+
+
+
+Part 1: Parsing JSON with JSON.parse()
+--------------------------------
+When you receive data from a web server, it is always in the form of a string. 
+To convert this string (data) into a JavaScript object, you can use JSON.parse().
+
+Example: Parsing a JSON String
+    Imagine we received this JSON string from a web server:
+            '{ "name": "John", "age": 30, "city": "New York" }'
+    
+    You can parse this string into a JavaScript object as follows:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JSON Parse Example</title>
+    </head>
+    <body>
+        <p id="demo"></p>
+
+        <script>
+            // jsonString content could be a file on a local or remote server
+            let jsonString = '{ "name": "John", "age": 30, "city": "New York" }'; //String
+
+            let obj = JSON.parse(jsonString); // JavaScript Object
+
+            //Access JavaScript Object Properties
+            document.getElementById("demo").innerHTML = obj.name + ", " + obj.age;
+        </script>
+    </body>
+    </html>
+
+
+Let us get serious now!
+Fetching JSON from a Server
+------------------------------
+You can request JSON data from a server using an AJAX request. 
+Here's an example using XMLHttpRequest:
+    fetching_json_server.html and json_demo.txt
+
+
+Handling JSON Arrays
+----------------------
+When parsing a JSON string derived from an array, 
+JSON.parse() will return a JavaScript array.
+
+Example: 
+handling_json_arrays.html and json_demo_array.txt
+
+
+
+
+
+Part 2: Strigifying a JavaScript Object using JSON.stringify() function
+----------------------------------------------------------------------
+The previuos part was about receiving data from a server. Now let us talk about sending data to a server.
+To send data to a server, the data must be in the form of a string. 
+You can use JSON.stringify() to convert a JavaScript object or array into a JSON string.
+
+Examples: Stringifying a JavaScript Object and Arrays
+
+Important: 
+Sometimes we log (console.log()) data to our console.
+files: json_strigify_js_object_console.html
+       json_strigify_array_console.html
+
+
+Sometimes we save and  retrieve data to the browser localStorage:
+files: json_save_localStorage.html
+
+And sometimes we send data to a local or remote server.
+By using XMLHttpRequest object or Fetch() api
+
+
+
+
+Part 3:Handling Special Cases:
+----------------------
+In the JSON Data Types you learned that JSON values cannot be one of the following data types:
+A function
+A date
+undefined
+
+What if you have data that conatains the above data types!?
+
+1. Dates
+Dates are not supported in JSON. 
+They are converted to strings and need to be converted back to Date objects after parsing.
+
+Example: Handling Dates in JSON
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Date Example</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script>
+                                                 // Date
+        const text = '{ "name": "John", "birth": "1986-12-14", "city": "New York" }';
+        const obj = JSON.parse(text);
+        obj.birth = new Date(obj.birth);
+        document.getElementById("demo").innerHTML = obj.name + ", " + obj.birth;
+    </script>
+</body>
+</html>
+
+
+
+2. Functions
+Functions are not supported in JSON. 
+If necessary, they must be converted to strings and evaluated back to functions after parsing.
+You use the eval() function.
+
+Example: Handling Functions in JSON
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Function Example</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script>
+                                               // function
+        const text = '{ "name": "John", "age": "function() { return 30; }", "city": "New York" }';
+        const obj = JSON.parse(text);
+
+                    // eval("("+"function"+")")
+        obj.age = eval("(" + obj.age + ")");
+        document.getElementById("demo").innerHTML = obj.name + ", " + obj.age();
+    </script>
+</body>
+</html>
+
+
+
+
+
+Conclusion
+JSON is a powerful format for data exchange between a server and a client. 
+Understanding how to parse JSON strings and stringify JavaScript objects is essential for web development. 
+This tutorial provided a complete guide to using JSON.parse() and JSON.stringify() with practical examples.
+
+End
