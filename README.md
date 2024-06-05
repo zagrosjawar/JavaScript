@@ -19,6 +19,8 @@ In this project, I am delving deep into various JavaScript concepts, dedicating 
 
 #### JavaScript AJAX (Asynchronous JavaScript and XML) 
 
+### JavaScript JSON (JavaScript Object Notation)
+
 
 
 ## How to Use This Repo/Tutorial
