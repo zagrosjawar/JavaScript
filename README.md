@@ -15,9 +15,9 @@ In this project, I am delving deep into various JavaScript concepts, dedicating 
 
 ## Topics Covered So Far
 
-#### JavaScript Web APIs 
+#### JavaScript Web APIs (Application Programming Interface)
 
-#### JavaScript AJAX (Asynchronous JavaScript and XML) 
+### JavaScript AJAX (Asynchronous JavaScript and XML) 
 
 ### JavaScript JSON (JavaScript Object Notation)
 
