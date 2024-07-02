@@ -45,6 +45,6 @@ removeItem(key): Removes the key/value pair from the storage.
 clear(): Clears all key/value pairs from the storage.
 
 Example:
-storageAPI.html  the example if thoroughly commented 
+storageAPI.html  the example is thoroughly commented 
 
 End
